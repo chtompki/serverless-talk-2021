@@ -58,6 +58,64 @@
             </ul>
         </section>
 
+
+        <section>
+            <h3>Who has heard of "serverless computing?"</h3>
+            <ul>
+                <li class="fragment">Heard of AWS Lambda or Google Cloud Functions?
+                    <ul>
+                        <li class="fragment">Services set to execute scripts responding to specified events, such as a HTTP request or a database update.</li>
+                    </ul>
+                </li>
+
+                <li class="fragment">Little to no infrasctucture to manage (e.g. no virtual machines)</li>
+                <li class="fragment">What does this look like?</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Hello World AWS Lambda Function</h3>
+            <pre><code class="python">import json
+
+print('Loading function')
+
+
+def lambda_handler(event, context):
+    #print("Received event: " + json.dumps(event, indent=2))
+    print("value1 = " + event['key1'])
+    print("value2 = " + event['key2'])
+    print("value3 = " + event['key3'])
+    return event['key1']  # Echo back the first key value
+    #raise Exception('Something went wrong')</code></pre>
+        </section>
+
+        <section>
+            <h3>Lambda Configuration</h3>
+            <ul>
+                <li class="fragment">Allocated 128mb memory</li>
+                <li class="fragment">Automatically provisioned CPU and network</li>
+                <li class="fragment">Bring your own code (node, python, java, c#, golang, ruby)</li>
+                <li class="fragment">Only pay for code executions.
+                <ul>
+                    <li class="fragment">Extraordinarily inexpensive</li>
+                    <li class="fragment">Approx $15/month for 500-1000 executions per minute</li>
+                </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h4>Ok that's serverless computing...what is this "Serverless Application Framework?"</h4>
+            <ul>
+                <li class="fragment"><a href="https://github.com/serverless/serverless">https://github.com/serverless/serverless</a> and
+                    <a href="https://www.serverless.com">https://www.serverless.com</a></li>
+                <li class="fragment">Open Source Project and CLI to help with serverless configuration and provisioning</li>
+                <li class="fragment">As rich for serverless as computing as Spring is for Java.</li>
+            </ul>
+        </section>
+
+
+
 <!--        <section>-->
 <!--            <h3>Introducing <code style="text-transform: none;">commons-text</code>.</h3>-->
 <!--            <ul>-->
