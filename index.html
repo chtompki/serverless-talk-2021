@@ -85,8 +85,7 @@ def lambda_handler(event, context):
     print("value1 = " + event['key1'])
     print("value2 = " + event['key2'])
     print("value3 = " + event['key3'])
-    return event['key1']  # Echo back the first key value
-    #raise Exception('Something went wrong')</code></pre>
+    return event['key1']  # Echo back the first key value</code></pre>
         </section>
 
         <section>
@@ -114,206 +113,28 @@ def lambda_handler(event, context):
             </ul>
         </section>
 
+        <section>
+            <h3>Tying together the API Gateway and Lambda</h3>
+            <pre><code class="python">import json
+
+print('Loading function')
 
 
-<!--        <section>-->
-<!--            <h3>Introducing <code style="text-transform: none;">commons-text</code>.</h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">-->
-<!--                    <em>Goal</em>. Text processing algorithms out of standard java library scope and promote-->
-<!--                    reuse across all of Apache's projects.</li>-->
-<!--                -->
-<!--                <li class="fragment">-->
-<!--                    <em>Secondary goal.</em>-->
-<!--                    <ul>-->
-<!--                        <li class="fragment">Remove heavier text processing mechanics from <code>commons-lang</code>.</li>-->
-<!--                        <li class="fragment">Ensure <code>lang</code> minimally remains all that every Java developer needs.</li>-->
-<!--                    </ul>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </section>-->
-<!--        -->
-<!--        <section>-->
-<!--            <h3>History</h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">-->
-<!--                    Traction on appetite for a -->
-<!--                    <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance</a> began to form-->
-<!--                    in October 2014 in <a href="https://issues.apache.org/jira/browse/LANG-591">LANG-591</a>.-->
-<!--                </li>-->
-<!--                <li class="fragment">-->
-<!--                    <a href="http://kinoshita.eti.br/">Bruno Kinoshita</a> and <a href="http://www.benediktritter.de/">Benedikt Ritter</a>-->
-<!--                    put together a proposal to create <code>text</code> in the sandbox.-->
-<!--                </li>-->
-<!--                <li class="fragment">-->
-<!--                    Last November, I picked up <code>text</code> where they left off, and by March 11, 2017-->
-<!--                    we had our 1.0.-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </section>-->
+def lambda_handler(event, context):
+    print("Received event: " + json.dumps(event, indent=2))
+    response = {
+        'statusCode': 200,
+        'headers':{'x-hello-world':'some-header/value'},
+        'body': event['body']
+    }
+    return response  # return the request body</code></pre>
+        </section>
 
-<!--        <section>-->
-<!--            <h3>Current Layout.</h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Textier utilities than <code>lang</code>'s <code>StringUtils</code>:</li>-->
-<!--                <ul class="fragment">-->
-<!--                    <li><code>StrBuilder</code>, <code>FormattableUtils</code>, <code>StrSubstitutor</code>, and-->
-<!--                        <code>StrTokenizer</code></li>-->
-<!--                </ul>-->
-<!--                <li class="fragment">Diff utilities</li>-->
-<!--                <li class="fragment">String similarity and edit distance.</li>-->
-<!--                <li class="fragment">String translation and escaping (e.g. XML, CSV, JSON, ect.)</li>-->
-<!--            </ul>-->
-<!--        </section>-->
-<!--        -->
-<!--        <section>-->
-<!--            <h2>From <code style="text-transform: none;">lang</code></h2>-->
-<!--        </section>-->
+        <section>
+            <h3>Tying together the API Gateway and Lambda</h3>
+            <p><img src="images/APIGateway.png" style="max-width: 800px;"/></p>
+        </section>
 
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">StrBuilder</code></h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">An alternative to <code>java.lang.StringBuilder</code></li>-->
-<!--                <li class="fragment">Better instance methods</li>-->
-<!--                <li class="fragment">Not thread safe, not final</li>-->
-<!--            </ul>-->
-<!--            <pre class="fragment"><code class="java">StrBuilder sb = new StrBuilder("Test");-->
-<!--sb.readFrom(CharBuffer.wrap(" 123")); // "Test 123"-->
-<!--sb = new StrBuilder("bb");-->
-<!--sb.replaceAll("b", "xbx"); // "xbxxbx"-->
-<!--sb = new StrBuilder("abc");-->
-<!--sb.replace(0, 1, "aaa"); // "aaabc"-->
-<!--</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">FormattableUtils</code></h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Provides basic control over formatting when using a-->
-<!--                    <code>java.util.Formatter</code></li>-->
-<!--                <li class="fragment">Primarily concerned with numeric precision and padding</li>-->
-<!--                <li class="fragment">No generalized alternative forms</li>-->
-<!--            </ul>-->
-<!--            <pre class="fragment"><code class="java">FormattableUtils.append("foo",-->
-<!--                        new Formatter(),-->
-<!--                        FormattableFlags.LEFT_JUSTIFY,-->
-<!--                        6, -1, '*').toString(); // "foo***"-->
-<!--FormattableUtils.append("foo",-->
-<!--                        new Formatter(),-->
-<!--                        FormattableFlags.LEFT_JUSTIFY,-->
-<!--                        6, -1).toString(); // "foo   "</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">StrSubstitutor</code></h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Provides a convenient way to do string substitutions</li>-->
-<!--                <li class="fragment">Think of it as a template engine in one class</li>-->
-<!--            </ul>-->
-<!--            <pre class="fragment"><code class="java">Map valuesMap = HashMap();-->
-<!--valuesMap.put("animal", "quick brown fox");-->
-<!--valuesMap.put("target", "lazy dog");-->
-<!--String templateString = "The ${animal} jumped " +-->
-<!--                        "over the ${target}.";-->
-<!--StrSubstitutor sub = new StrSubstitutor(valuesMap);-->
-<!--String resolvedString = sub.replace(templateString);-->
-<!--// "The quick brown fox jumped over the lazy dog."-->
-<!--</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">StrTokenizer</code></h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Tokenizes a string based based on delimiters (separators) and supporting quoting-->
-<!--                    and ignored character concepts-->
-<!--                </li>-->
-<!--                <li class="fragment">Aims to do a similar job to <code>java.util.StringTokenizer</code></li>-->
-<!--                <li class="fragment">Offers much more control and flexibility including implementing the-->
-<!--                    <code>java.util.ListIterator</code> interface-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">StrTokenizer</code></h3>-->
-<!--            <pre><code class="java">final String input = "a;b;c;\"d;e\";f; ; ;  ";-->
-<!--final StrTokenizer tok = new StrTokenizer(input);-->
-<!--tok.setDelimiterChar(';');-->
-<!--tok.setQuoteChar('"');-->
-<!--//Matches the String trim() whitespace characters.-->
-<!--tok.setIgnoredMatcher(StrMatcher.trimMatcher());-->
-<!--tok.setIgnoreEmptyTokens(false);-->
-<!--final String tokens[] = tok.getTokenArray();-->
-<!--// String[]{"a", "b", "c", "d;e", "f", "", "", ""};</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">StringEscapeUtils</code></h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Provides a convenient way to do escaping</li>-->
-<!--            </ul>-->
-<!--            <pre class="fragment"><code class="java">StringEscapeUtils.escapeJson("He didn't say, \"stop!\"");-->
-<!--// "He didn\\'t say, \\\"stop!\\\""-->
-<!--StringEscapeUtils.escapeJava("\\\b\t\r");-->
-<!--// "\\\\\\b\\t\\r" </code></pre>-->
-<!--        </section>-->
-<!--        -->
-<!--        <section>-->
-<!--            <h2>New functionality, unique to <code style="text-transform: none;">text</code></h2>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">LongestCommonSubsequence</code></h3>-->
-<!--            <p>The Longest commons subsequence is a classical String similarity algorithm.</p>-->
-<!--            <pre><code class="java">LongestCommonSubsequence siml =-->
-<!--        new LongestCommonsSubsequence();-->
-<!--siml.apply("abba","abab"); // 3-->
-<!--siml.apply("frog", "fog"); // 3-->
-<!--siml.apply("PENNSYLVANIA", "PENNCISYLVNIA"); // 11-->
-<!--smil.apply("elephant", "hippo"); // 1</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none; font-size:90%;">LongestCommonSubsequenceDistance</code></h3>-->
-<!--            <pre><code class="java">LongestCommonSubsequenceDistance dist =-->
-<!--        new LongestCommonSubsequenceDistance();-->
-<!--dist.apply("abba","abab"); // 2-->
-<!--dist.apply("frog", "fog"); // 1-->
-<!--dist.apply("PENNSYLVANIA", "PENNCISYLVNIA"); // 3-->
-<!--dist.apply("elephant", "hippo"); // 11</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3><code style="text-transform: none;">LevenshteinDistance</code></h3>-->
-<!--            <p>Different algorithm with almost the same results.</p>-->
-<!--            <pre><code class="java">LevenshteinDistance dist = new LevenshteinDistance();-->
-<!--dist.apply("abba","abab"); // 2-->
-<!--dist.apply("frog", "fog"); // 1-->
-<!--dist.apply("PENNSYLVANIA", "PENNCISYLVNIA"); // 3-->
-<!--dist.apply("elephant", "hippo"); // 7</code></pre>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3>What else is there?</h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment"><code>org.apache.commons.text.diff</code> contains the a variety of diff tools.</li>-->
-<!--                <li class="fragment"><code>org.apache.commons.text.similarity</code> contains various other similarity/distance tools</li>-->
-<!--                <ul class="fragment">-->
-<!--                    <li>Cosine similarity and distance, Hamming distance, Jaccard distance, and Jaro-winkler.</li>-->
-<!--                </ul>-->
-<!--                <li class="fragment"><code>org.apache.commons.text.translate</code> mainly supports <code>StringEscapeUtils</code>, but has more...</li>-->
-<!--            </ul>-->
-<!--        </section>-->
-
-<!--        <section>-->
-<!--            <h3>What's next?</h3>-->
-<!--            <ul>-->
-<!--                <li class="fragment">Release 1.1 in the next month or so? Assuming no 1.0.1......</li>-->
-<!--                <li class="fragment"><code>WordUtils</code> from <code>lang</code>, with some updates.</li>-->
-<!--                <li class="fragment"><code>RandomStringGenerator</code> thanks to the <code>rng</code> crew.</li>-->
-<!--                <li class="fragment"><code>@Deprecated</code> on code taken from <code>lang</code></li>-->
-<!--            </ul>-->
-<!--        </section>-->
 
         <section>
             <h2>Questions?</h2>
