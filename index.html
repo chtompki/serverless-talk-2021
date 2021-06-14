@@ -47,15 +47,19 @@
         </section>
 
         <section>
-            <h3>Who I am.</h3>
+            <h3>Who is this guy?</h3>
             <ul>
-                <li class="fragment"><a href="mailto:chtompki@apache.org">chtompki@apache.org</a>
+                <li class="fragment"data-fragment-index="1"><a href="mailto:chtompki@apache.org">chtompki@apache.org</a>
                 </li>
-                <li class="fragment">Software Developer (DevOps, Java, Python, TypeScript)</li>
-                <li class="fragment">Apache Commons Committer</li>
-                <li class="fragment">Apache Member, and Jakarta EE Relations Manager</li>
-                <li class="fragment">Mathematician/Logician (?, sure why not).</li>
+                <li class="fragment" data-fragment-index="2">Software Developer (DevOps, Java, Python, TypeScript)</li>
+                <li class="fragment" data-fragment-index="3">Chief DevOps Engineer at Patch.com</li>
+                <li class="fragment" data-fragment-index="4">Apache Commons Committer</li>
+                <li class="fragment" data-fragment-index="5">Apache Member, and Jakarta EE Relations Manager</li>
+                <li class="fragment" data-fragment-index="6">Mathematician/Logician (?, sure why not).</li>
             </ul>
+            <a class="fragment" data-fragment-index="3" style="max-width: 150px; position: absolute; top: 49%; right: 10%; " href="https://www.patch.com">
+                <img src="images/patch-logo.png" />
+            </a>
         </section>
 
 
@@ -153,7 +157,7 @@ def lambda_handler(event, context):
                 <li class="fragment"><a href="https://github.com/serverless/serverless">https://github.com/serverless/serverless</a> and
                     <a href="https://www.serverless.com">https://www.serverless.com</a></li>
                 <li class="fragment">Open Source Project and CLI to help with serverless configuration and provisioning</li>
-                <li class="fragment">Kinda like cloudformation, but directed at making creating lambda applications easier.</li>
+                <li class="fragment">Similar to CloudFormation, but directed at making creating lambda applications easier.</li>
             </ul>
         </section>
 
@@ -180,6 +184,14 @@ functions:
           path: /
           method: post</code></pre>
         </section>
+
+        <section>
+            <h3><code style="text-transform: none;">sls deploy</code></h3>
+            <p class="fragment">We get a cloudformation deployment looking like this</p>
+            <p class="fragment"><img src="images/ServerlessCfnDeploy.png" style="max-width: 800px;"/></p>
+        </section>
+
+
 
 
         <section>
