@@ -104,13 +104,7 @@ def lambda_handler(event, context):
         </section>
 
         <section>
-            <h4>Ok that's serverless computing...what is this "Serverless Application Framework?"</h4>
-            <ul>
-                <li class="fragment"><a href="https://github.com/serverless/serverless">https://github.com/serverless/serverless</a> and
-                    <a href="https://www.serverless.com">https://www.serverless.com</a></li>
-                <li class="fragment">Open Source Project and CLI to help with serverless configuration and provisioning</li>
-                <li class="fragment">As rich for serverless as computing as Spring is for Java.</li>
-            </ul>
+            <h2>So what's a serverless API? How does that work?</h2>
         </section>
 
         <section>
@@ -133,6 +127,58 @@ def lambda_handler(event, context):
         <section>
             <h3>Tying together the API Gateway and Lambda</h3>
             <p><img src="images/APIGateway.png" style="max-width: 800px;"/></p>
+        </section>
+
+        <section>
+            <h3>Our deployed API</h3>
+            <p><img src="images/APIGatewayStage.png" style="max-width: 800px;"/></p>
+        </section>
+
+        <section>
+            <h3>Example API Call</h3>
+            <pre><code>chtompki@Robs-MacBook-Pro ~ % curl \
+  -X POST https://jnvg8rtlt8.execute-api.us-east-1.amazonaws.com/prod \
+  -d '{"key1":"value1", "key2":"value2", "key3":"value3"}' && echo ""
+{"key1":"value1", "key2":"value2", "key3":"value3"}</code></pre>
+        </section>
+
+        <section>
+            <h2>Ok, great a lot of manual wiring and no DevOps. Seems not that great.</h2>
+            <p class="fragment">Queue the Serverless Application Framework</p>
+        </section>
+
+        <section>
+            <h4>What is this "Serverless Application Framework?"</h4>
+            <ul>
+                <li class="fragment"><a href="https://github.com/serverless/serverless">https://github.com/serverless/serverless</a> and
+                    <a href="https://www.serverless.com">https://www.serverless.com</a></li>
+                <li class="fragment">Open Source Project and CLI to help with serverless configuration and provisioning</li>
+                <li class="fragment">Kinda like cloudformation, but directed at making creating lambda applications easier.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3><code style="text-transform: none;">serverless.yml</code></h3>
+            <pre><code class="yaml">service: chtompki-serverless-example-api
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: '20201221'
+  ## IMPORTANT: Serverless makes too many buckets
+  deploymentBucket:
+    name: chtompki-serverless-deployments
+    serverSideEncryption: AES256
+
+functions:
+  hello:
+    handler: lambda_function.lambda_handler
+    events:
+      - http:
+          path: /
+          method: post</code></pre>
         </section>
 
 
