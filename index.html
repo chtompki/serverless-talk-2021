@@ -149,6 +149,27 @@ def lambda_handler(event, context):
         </section>
 
         <section>
+            <h3>Benefits of serverless computing</h3>
+            <ul>
+                <li class="fragment">INEXPENSIVE!!! You only pay for time that the lambda is running</li>
+                <li class="fragment">Quickly deployable</li>
+                <li class="fragment">No infrastructure maintainance</li>
+                <li class="fragment">Quick integration with other AWS services (e.g. cloudwatch)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Drawbacks of serverless computing</h3>
+            <ul>
+                <li class="fragment">15 minute call timeout (can't do major batch workloads)</li>
+                <li class="fragment">"Cold starts" - 500ms first call load time</li>
+                <li class="fragment">Global state weirdness.</li>
+                <li class="fragment">Max 1000 concurrent requests to a lambda.</li>
+                <li class="fragment">Database threadpool exhaustion concerns</li>
+            </ul>
+        </section>
+
+        <section>
             <h2>Ok, great a lot of manual wiring and no DevOps. Seems not that great.</h2>
             <p class="fragment">Queue the Serverless Application Framework</p>
         </section>
