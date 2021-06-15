@@ -211,6 +211,44 @@ functions:
         </section>
 
         <section>
+            <h3>What else can we get from serverless?</h3>
+            <ol>
+                <li class="fragment">Deployment to various collection of cloud providers
+                    <ul>
+                        <li class="fragment">AWS, Azure, GCP, Knative, Tencent, Alibaba, Cloudflare, OpenWhisk, etc.</li>
+                    </ul>
+                </li>
+                <li class="fragment"><code>serverless.yml</code> can declare all parts of CFT under <code>resources</code> section</li>
+                <li class="fragment"><code>plugins</code> seciton of the <code>serverless.yml</code> allows importing other node modules that accommodate more customizations</li>
+            </ol>
+        </section>
+
+        <section>
+            <h3>Cool serverless plugins</h3>
+            <ul>
+                <li class="fragment">
+                    The <a href="https://github.com/dherault/serverless-offline">serverless-offline</a>
+                    plugin accommodates a full local serverless development environment
+                </li>
+                <li class="fragment">
+                    The <a href="https://github.com/serverless-heaven/serverless-webpack">serverless-webpack</a> plugin
+                    accommodates writing your lambda functions in typescript as opposed to simply javascript.
+                </li>
+                <li class="fragment">
+                    The <a href="https://github.com/juanjoDiaz/serverless-plugin-warmup">serverless-plugin-warmup</a>
+                    keeps your lambdas warm so you don't have to deal with that pesky warm-up period.
+                </li>
+                <li class="fragment">
+                    See
+                    <a href="https://www.serverless.com/blog/most-popular-framework-plugins">
+                        https://www.serverless.com/blog/most-popular-framework-plugins
+                    </a>
+                    for more
+                </li>
+            </ul>
+        </section>
+
+        <section>
             <h2>Questions?</h2>
         </section>
     </div>
